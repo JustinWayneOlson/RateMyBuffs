@@ -1,66 +1,33 @@
-console.log("test");
-
 /**
  * Created by justin on 4/10/15.
  */
+// 'use strict';
 
 var script = document.createElement('script');
-script.src = 'https://code.jquery.com/jquery-1.11.0.min.js';
+script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js';
 script.type = 'text/javascript';                            //import jquery
 document.getElementsByTagName('head')[0].appendChild(script);
 //var url = window.location.href; //get current url
+
 var professorsOnPage = new Array();
 var courseOnPage = new Array();
 var i,r = 0;
 var instructors= new Object();
+
 function getIframe() {
     return $("#ptifrmtgtframe").contents();
 }
-//iframe = $("#ptifrmtgtframe").contents(); //creates a variable that references to the iframe
-function grabProfessorsName(elem) {
-    var elemjq = elem/*if this*/ ? $(elem)/*do this*/ : getIframe(); /*else do this */
-    //if (url == "https://portal.prod.cu.edu/psp/epprod/UCB2/HRMS/c/SA_LEARNER_SERVICES.SSR_SSENRL_CART.GBL?Page=SSR_SSENRL_CART") { //check to make sure the user is on the correct page
 
-    $.each(elemjq.find("span[id*=MTG_INSTR]"),
-        function () {
-            if ($(this).text() != "Staff") {
-                professorsOnPage[i] = $(this).text();
-                i++;
-            }
-        });
-    //var instructorName = iframe.find("span[id*=MTG_INSTR");
-    //for(var j = 0; j < professorsOnPage.length; j++) {
-    //    professorsOnPage[j] = professorsOnPage[j].replace(" ", "-");//.toLowerCase();
-    //    console.log(professorsOnPage[j]);
-    //}
-    return 0;
-}
-//function grabClassCode(elem) {
-//    var elemjq = elem/*if this*/ ? $(elem)/*do this*/ : getIframe(); /*else do this */
-//    //if (url == "https://portal.prod.cu.edu/psp/epprod/UCB2/HRMS/c/SA_LEARNER_SERVICES.SSR_SSENRL_CART.GBL?Page=SSR_SSENRL_CART") { //check to make sure the user is on the correct page
-//
-//    $.each(elemjq.find("span[id*=win0divSSR_CLSRSLT_WRK_GROUPBOX2GP]"),
-//        function () {
-//                courseOnPage[r] = $(this).text();
-//                r++;
-//
-//        });
-//    //var instructorName = iframe.find("span[id*=MTG_INSTR");
-//    //for(var j = 0; j < professorsOnPage.length; j++) {
-//    //    professorsOnPage[j] = professorsOnPage[j].replace(" ", "-");//.toLowerCase();
-//    //    console.log(professorsOnPage[j]);
-//    //}
-//    return 0;
-//}
-function pullJSON() {
-    var request = $.getJSON("https://52a7fe5a.ngrok.com/instructors.json", function(data) {
-        console.log(data);
-        instructors = data;
-    })
+var courseData;
+$.getJSON("https://52a7fe5a.ngrok.com/courses.json", function(courseDataLocal) {
+    courseData = courseDataLocal;
+});
 
-    return instructors;
-}
-//grabProfessorsName();
+var instructorData;
+$.getJSON("https://52a7fe5a.ngrok.com/instructors.json", function(instructorDataLocal) {
+    instructorData = instructorDataLocal;
+});
+
 $("iframe")[0].addEventListener("load", function () {
     iframe = getIframe();
     console.log("yoooooooo");
@@ -78,55 +45,62 @@ $("iframe")[0].addEventListener("load", function () {
                 yay = ev;
                 console.log("Hey Im grabbing a professors name");
                 //grabProfessorsName(ev.target);
-                tableAppend(ev.target);
+                appendBoth(ev.target);
             }
-
-
-
-
         }
+        return false;
     }, false);
 });
-function tableAppend(elem){
-    var elemjq = elem/*if this*/ ? $(elem)/*do this*/ : iframe; /*else do this */
 
-    $.each(elemjq.find("[id*=win0divSSR_CLSRCH_MTG1]"), function() {
-            if ($(this).find(".addedScores").length) {
-                return false;
-            }
-            //$(document).ready(function(){
-            whoa = this;
+function appendBoth (elem) {
+    var elemjq = elem/*if this*/ ? $(elem)/*do this*/ : iframe; /*else do this */
+    if ($(elemjq).find(".addedScores").length) {
+        return;
+    }
+    $.each(elemjq.find("[id*=win0divSSR_CLSRSLT_WRK_GROUPBOX2]:not([id*=GP])"), function() {
+
+
+        var courseHtml = $(this).find("div[id*=win0divSSR_CLSRSLT_WRK_GROUPBOX2GP]").text();
+        console.log("coursehtml ", courseHtml);
+        var course = courseHtml.match(/[A-Z]{4} [0-9]{4}/)[0];
+        console.log("course ", course);
+        course = normalizeCourse(course);
+        course = normalize(course);
+        console.log("normalizedCourse ", course);
+        if(courseData[course]) {
+            overCourseScr = courseData[course].average_overall.toFixed(1) + "/6.0";
+        }
+        else{
+            overCourseScr = "No Data Found";
+        }
+        console.log("overCourseScr ", overCourseScr);
+
+        $(this).find("[id*=win0divSSR_CLSRCH_MTG1]").each(function () {
             var prof = $(this).find("span[id*=MTG_INSTR]").text();
             prof = normalize(prof);
-            if(prof=="staff"){
-                overScr = "N/A";
+            if (prof == "staff") {
+                overInstScr = "N/A";
             }
-            else{
-                if(instructors[prof]) {
-                    overScr = instructors[prof].average_overall.toFixed(1) + "/6.0";
+            else {
+                if (instructorData[prof]) {
+                    overInstScr = instructorData[prof].average_overall.toFixed(1) + "/6.0";
                 }
-                else{
-                    overScr = "No Data Found";
+                else {
+                    overInstScr = "No Data Found";
                 }
 
             }
             $(this).find('th').eq(7).after('<th class="PSLEVEL1GRIDCOLUMNHDR InstructorScoreHeading addedScores">Instructor Score</th>');
-            $(this).find('td').eq(7).after('<td class="PSLEVEL3GRIDROW InstructorScore addedScores">' + overScr + '</td>');
+            $(this).find('td').eq(7).after('<td class="PSLEVEL3GRIDROW InstructorScore addedScores">' + overInstScr + '</td>');
             $(this).find('th').eq(8).after('<th class="PSLEVEL1GRIDCOLUMNHDR ClassScoreHeading addedScores">Class Score</th>');
-             $(this).find('td').eq(8).after('<td class="PSLEVEL3GRIDROW ClassScore addedScores">5.2/6.0</td>');
-
-            professorsOnPage.push(prof);
+            $(this).find('td').eq(8).after('<td class="PSLEVEL3GRIDROW ClassScore addedScores">' + overCourseScr + '</td>');
+        });
     });
 }
+
 function normalize(prof){
         return prof.replace(" ", "-").toLowerCase();
 }
-//for(var i=0;i<professorsOnPage.length;i++){
-//    console.log(professorsOnPage[i]);
-//}
-//add rows
-
-//win0divSSR_CLSRSLT_WRK_GROUPBOX3$0"
-
-//win0divSSR_CLSRSLT_WRK_GROUPBOX3$0"
-pullJSON();
+function normalizeCourse(course){
+    return course.replace(/([A-Z]{4}) (\d{4}).+/,"$1-$2").toLowerCase();
+}
