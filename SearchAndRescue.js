@@ -19,30 +19,39 @@ function grabProfessorsName() {
 
         $.each(iframe.find("span[id*=MTG_INSTR]"),
             function() {
-                if($(this.text) != "Staff"){
-                    professorsOnPage[i] = "test" + $(this).text +"test" ;
+                if($(this).text() != "Staff"){
+                    professorsOnPage[i] = $(this).text();
                     i++;
                 }
         } )
 
+
         //var instructorName = iframe.find("span[id*=MTG_INSTR");
         for(j=0;j<professorsOnPage.length;j++){
-            for(k=0;k<(professorsOnPage[j].length-1);k++){
-                if((professorsOnPage[j])[k] == " "){
-                   (professorsOnPage[j])[k] = "-"
-                }
-            }
+            professorsOnPage[j] = professorsOnPage[j].replace(" ", "-");
+            //for(k=0;k<(professorsOnPage[j].length-1);k++){
+            //    if((professorsOnPage[j])[k] == " "){
+            //       (professorsOnPage[j])[k] = "-"
+            //    }
+            //}
             console.log(professorsOnPage[j]);
         }
 return 0;
 
 }
+function pullJSON(){
+
+}
 //grabProfessorsName();
 $("iframe")[0].addEventListener("load", function () {
-    console.log("yoooooooo")
-    getIframe()[0].addEventListener("DOMSubtreeModified", function (ev) {
-        console.log("Iframe Subtree");
-        if(iframe[0].getElementById("DERIVED_REGFRM1_TITLE1").text == "Search Results") {
+    iframe = getIframe();
+    console.log("yoooooooo");
+    iframe[0].addEventListener("DOMSubtreeModified", function (ev) {
+        //console.log("Iframe Subtree");
+        if(iframe[0].getElementById("DERIVED_REGFRM1_TITLE1").innerHTML == null) {
+            console.log("not on the right page");
+        }
+        else if(iframe[0].getElementById("DERIVED_REGFRM1_TITLE1").innerHTML == "Search Results") {
             grabProfessorsName();
             console.log("you are on the right page");
         }
