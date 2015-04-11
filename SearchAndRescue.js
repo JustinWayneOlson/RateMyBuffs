@@ -8,7 +8,8 @@ script.type = 'text/javascript';                            //import jquery
 document.getElementsByTagName('head')[0].appendChild(script);
 //var url = window.location.href; //get current url
 var professorsOnPage = new Array();
-var i = 0;
+var courseOnPage = new Array();
+var i,r = 0;
 var instructors= new Object();
 function getIframe() {
     return $("#ptifrmtgtframe").contents();
@@ -32,6 +33,23 @@ function grabProfessorsName(elem) {
     //}
     return 0;
 }
+//function grabClassCode(elem) {
+//    var elemjq = elem/*if this*/ ? $(elem)/*do this*/ : getIframe(); /*else do this */
+//    //if (url == "https://portal.prod.cu.edu/psp/epprod/UCB2/HRMS/c/SA_LEARNER_SERVICES.SSR_SSENRL_CART.GBL?Page=SSR_SSENRL_CART") { //check to make sure the user is on the correct page
+//
+//    $.each(elemjq.find("span[id*=win0divSSR_CLSRSLT_WRK_GROUPBOX2GP]"),
+//        function () {
+//                courseOnPage[r] = $(this).text();
+//                r++;
+//
+//        });
+//    //var instructorName = iframe.find("span[id*=MTG_INSTR");
+//    //for(var j = 0; j < professorsOnPage.length; j++) {
+//    //    professorsOnPage[j] = professorsOnPage[j].replace(" ", "-");//.toLowerCase();
+//    //    console.log(professorsOnPage[j]);
+//    //}
+//    return 0;
+//}
 function pullJSON() {
     var request = $.getJSON("https://52a7fe5a.ngrok.com/instructors.json", function(data) {
         console.log(data);
@@ -82,7 +100,13 @@ function tableAppend(elem){
                 overScr = "N/A";
             }
             else{
-                overScr = instructors[prof].average_overall.toFixed(1) + "/6.0";
+                if(instructors[prof]) {
+                    overScr = instructors[prof].average_overall.toFixed(1) + "/6.0";
+                }
+                else{
+                    overScr = "No Data Found";
+                }
+
             }
             $(this).find('th').eq(7).after('<th class="PSLEVEL1GRIDCOLUMNHDR InstructorScoreHeading addedScores">Instructor Score</th>');
             $(this).find('td').eq(7).after('<td class="PSLEVEL3GRIDROW InstructorScore addedScores">' + overScr + '</td>');
