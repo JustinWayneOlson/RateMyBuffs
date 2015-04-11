@@ -33,4 +33,4 @@ function grabProfessorsName() {
             console.log(professorsOnPage[j]);
         }
 }
-grabProfessorsName();
+//grabProfessorsName();
