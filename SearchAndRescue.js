@@ -41,11 +41,8 @@ return 0;
 
 }
 function pullJSON(){
-    var instructors={};
-    request = $.getJSON("../instructors.json", function(data) { console.log(data); instructors = data; })
-    $.when(request).then(function(data, textStatus, jqXHR) {
-
-    })
+    var instructors= new Object();
+    JSON.parse('string');
     return instructors;
 }
 //grabProfessorsName();
@@ -53,7 +50,7 @@ $("iframe")[0].addEventListener("load", function () {
     iframe = getIframe();
     console.log("yoooooooo");
     iframe[0].addEventListener("DOMSubtreeModified", function (ev) {
-        //console.log("Iframe Subtree");
+        console.log("Iframe Subtree");
 
         if(iframe[0].getElementById("DERIVED_REGFRM1_TITLE1").innerHTML == null) {
             console.log("not on the right page");
@@ -67,18 +64,18 @@ $("iframe")[0].addEventListener("load", function () {
 });
 
 //add rows
-$.each(iframe.find("[id*=win0divSSR_CLSRCH_MTG1]"),
-    function() {
-        //$(document).ready(function(){
-        $(this).find('th').eq(7).after('<td id="instrHead">Instructor Score</td>');
-
-    });
-$.each(iframe.find("[id*=win0divSSR_CLSRCH_MTG1]"),
-    function() {
-        //$(document).ready(function(){
-        $(this).find('td').eq(8).after('<td id="instrBody">1.2/6.0</td>');
-
-    });
+//$.each(iframe.find("[id*=win0divSSR_CLSRCH_MTG1]"),
+//    function() {
+//        //$(document).ready(function(){
+//        $(this).find('th').eq(7).after('<td id="instrHead">Instructor Score</td>');
+//
+//    });
+//$.each(iframe.find("[id*=win0divSSR_CLSRCH_MTG1]"),
+//    function() {
+//        //$(document).ready(function(){
+//        $(this).find('td').eq(8).after('<td id="instrBody">1.2/6.0</td>');
+//
+//    });
 
 
 
