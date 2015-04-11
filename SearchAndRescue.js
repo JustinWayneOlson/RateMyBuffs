@@ -77,9 +77,15 @@ function tableAppend(elem){
             //$(document).ready(function(){
             whoa = this;
             var prof = $(this).find("span[id*=MTG_INSTR]").text();
-            normalize(prof);
+            prof = normalize(prof);
+            if(prof=="staff"){
+                overScr = "N/A";
+            }
+            else{
+                overScr = instructors[prof].average_overall.toFixed(1) + "/6.0";
+            }
             $(this).find('th').eq(7).after('<th class="PSLEVEL1GRIDCOLUMNHDR InstructorScoreHeading addedScores">Instructor Score</th>');
-            $(this).find('td').eq(7).after('<td class="PSLEVEL3GRIDROW InstructorScore addedScores"> 5.7/6.0 <!--instructors[prof].average_overall--> </td>');
+            $(this).find('td').eq(7).after('<td class="PSLEVEL3GRIDROW InstructorScore addedScores">' + overScr + '</td>');
             $(this).find('th').eq(8).after('<th class="PSLEVEL1GRIDCOLUMNHDR ClassScoreHeading addedScores">Class Score</th>');
              $(this).find('td').eq(8).after('<td class="PSLEVEL3GRIDROW ClassScore addedScores">5.2/6.0</td>');
 
