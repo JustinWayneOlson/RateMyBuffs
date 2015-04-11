@@ -1,3 +1,5 @@
+console.log("test");
+
 /**
  * Created by justin on 4/10/15.
  */
