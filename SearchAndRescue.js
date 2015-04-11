@@ -26,7 +26,7 @@ function grabProfessorsName(elem) {
             }
         });
     //var instructorName = iframe.find("span[id*=MTG_INSTR");
-    //for (var j = 0; j < professorsOnPage.length; j++) {
+    for (var j = 0; j < professorsOnPage.length; j++) {
     //    professorsOnPage[j] = professorsOnPage[j].replace(" ", "-");//.toLowerCase();
     //    console.log(professorsOnPage[j]);
     //}
@@ -70,9 +70,8 @@ $("iframe")[0].addEventListener("load", function () {
 function tableAppend(elem){
     var elemjq = elem/*if this*/ ? $(elem)/*do this*/ : iframe; /*else do this */
 
-    $.each(elemjq.find("[id*=win0divSSR_CLSRCH_MTG1]"),
-        function() {
-            if($(this).find(".addedScores").length) {
+    $.each(elemjq.find("[id*=win0divSSR_CLSRCH_MTG1]"), function() {
+            if ($(this).find(".addedScores").length) {
                 return false;
             }
             //$(document).ready(function(){
@@ -82,17 +81,13 @@ function tableAppend(elem){
             $(this).find('th').eq(7).after('<th class="PSLEVEL1GRIDCOLUMNHDR InstructorScoreHeading addedScores">Instructor Score</th>');
             $(this).find('td').eq(7).after('<td class="PSLEVEL3GRIDROW InstructorScore addedScores">' + instructors[prof].average_overall + '</td>');
             /*$(this).find('th').eq(8).after('<th class="PSLEVEL1GRIDCOLUMNHDR ClassScoreHeading addedScores">Class</th>');
-            $(this).find('td').eq(8).after('<td class="PSLEVEL3GRIDROW ClassScore addedScores">5.2/6.0</td>');*/
+             $(this).find('td').eq(8).after('<td class="PSLEVEL3GRIDROW ClassScore addedScores">5.2/6.0</td>');*/
 
             professorsOnPage.push(prof);
-
-        });
+    });
 }
 function normalize(prof){
-    for (var j = 0; j < prof.length; j++) {
-        prof[j] = prof[j].replace(" ", "-");//.toLowerCase();
-    }
-    return prof;
+        return prof.replace(" ", "-").toLowerCase();
 }
 //for(var i=0;i<professorsOnPage.length;i++){
 //    console.log(professorsOnPage[i]);
