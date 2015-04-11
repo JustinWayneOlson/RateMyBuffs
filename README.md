@@ -3,7 +3,7 @@ A Chrome extension that makes choosing UCB classes easier by retrieve professor 
 
 Made by:  
 
-Justin Olsen @JustinWayneOlson  
+Justin Olson @JustinWayneOlson  
 
 Conner Simmering @simmeringc  
 
