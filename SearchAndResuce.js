@@ -5,11 +5,11 @@ var script = document.createElement('script');
 script.src = 'http://code.jquery.com/jquery-1.11.0.min.js';
 script.type = 'text/javascript';                            //import jquery
 document.getElementsByTagName('head')[0].appendChild(script);
-var url = window.location.href; //get current url
+//var url = window.location.href; //get current url
 var professorsOnPage = new Array();
 var i = 0;
 function grabProfessorsName() {
-    if (url == "https://portal.prod.cu.edu/psp/epprod/UCB2/HRMS/c/SA_LEARNER_SERVICES.SSR_SSENRL_CART.GBL?Page=SSR_SSENRL_CART") { //check to make sure the user is on the correct page
+    //if (url == "https://portal.prod.cu.edu/psp/epprod/UCB2/HRMS/c/SA_LEARNER_SERVICES.SSR_SSENRL_CART.GBL?Page=SSR_SSENRL_CART") { //check to make sure the user is on the correct page
         iframe = $("#ptifrmtgtframe").contents(); //creates a variable that references to the iframe
         $.each(iframe.find("span[id*=MTG_INSTR]"),
             function() {
@@ -24,5 +24,5 @@ function grabProfessorsName() {
         for(j=0;j<professorsOnPage.length;j++){
             console.log(professorsOnPage[j]);
         }
-    }
 }
+grabProfessorsName();
