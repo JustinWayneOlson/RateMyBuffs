@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+
+  "name": "Getting started example",
+  "description": "This exi",
+  "version": "1.0",
+
+  "icons": { "16": "images/rsz_cufcq_16.png",
+           "48": "images/rsz_cufcq_48.png",
+          "128": "images/rsz_cufcq_128.png" },
+
+  "browser_action": {
+    "default_icon": "images/rsz_cufcq_128.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/"
+  ]
+}
