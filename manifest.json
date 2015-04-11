@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "Getting started example",
-  "description": "This exi",
+  "name": "RateMyBuffs",
+  "description": "Add cufcq ratings to UCB class registration pages.",
   "version": "1.0",
 
   "icons": { "16": "images/rsz_cufcq_16.png",
@@ -11,8 +11,9 @@
 
   "browser_action": {
     "default_icon": "images/rsz_cufcq_128.png",
-    "default_popup": "popup.html"
+    "default_popup": "clicktest.html"
   },
+
   "permissions": [
     "activeTab",
     "https://ajax.googleapis.com/"
