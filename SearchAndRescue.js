@@ -1,6 +1,7 @@
 /**
  * Created by justin on 4/10/15.
  */
+
 var script = document.createElement('script');
 script.src = 'http://code.jquery.com/jquery-1.11.0.min.js';
 script.type = 'text/javascript';                            //import jquery
@@ -32,5 +33,12 @@ function grabProfessorsName() {
             }
             console.log(professorsOnPage[j]);
         }
+
+        //for each(function{regex})
 }
 //grabProfessorsName();
+element.addEventListener("DOMNodeInserted", function (ev) {
+    if(document.getElementById("DERIVED_REGFRM1_TITLE1")) {
+        grabProfessorsName();
+    }
+})
