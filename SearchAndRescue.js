@@ -39,7 +39,7 @@ function grabProfessorsName() {
 }
 //grabProfessorsName();
 element.addEventListener("DOMNodeInserted", function (ev) {
-    if(iframe.(document.getElementById("DERIVED_REGFRM1_TITLE1")) == "Search Results")) {
+    if(iframe.(document.getElementById("DERIVED_REGFRM1_TITLE1")) == "Search Results") {
         grabProfessorsName();
     }
 })
