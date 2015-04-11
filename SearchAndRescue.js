@@ -28,7 +28,7 @@ function grabProfessorsName() {
         //var instructorName = iframe.find("span[id*=MTG_INSTR");
         for(j=0;j<professorsOnPage.length;j++){
             for(k=0;k<(professorsOnPage[j].length-1);k++){
-                if((professorsOnPage[j])[k] = = " "){
+                if((professorsOnPage[j])[k] == " "){
                    (professorsOnPage[j])[k] = "-"
                 }
             }
