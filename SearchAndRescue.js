@@ -26,7 +26,7 @@ function grabProfessorsName(elem) {
             }
         });
     //var instructorName = iframe.find("span[id*=MTG_INSTR");
-    for (var j = 0; j < professorsOnPage.length; j++) {
+    //for(var j = 0; j < professorsOnPage.length; j++) {
     //    professorsOnPage[j] = professorsOnPage[j].replace(" ", "-");//.toLowerCase();
     //    console.log(professorsOnPage[j]);
     //}
@@ -79,9 +79,9 @@ function tableAppend(elem){
             var prof = $(this).find("span[id*=MTG_INSTR]").text();
             normalize(prof);
             $(this).find('th').eq(7).after('<th class="PSLEVEL1GRIDCOLUMNHDR InstructorScoreHeading addedScores">Instructor Score</th>');
-            $(this).find('td').eq(7).after('<td class="PSLEVEL3GRIDROW InstructorScore addedScores">' + instructors[prof].average_overall + '</td>');
-            /*$(this).find('th').eq(8).after('<th class="PSLEVEL1GRIDCOLUMNHDR ClassScoreHeading addedScores">Class</th>');
-             $(this).find('td').eq(8).after('<td class="PSLEVEL3GRIDROW ClassScore addedScores">5.2/6.0</td>');*/
+            $(this).find('td').eq(7).after('<td class="PSLEVEL3GRIDROW InstructorScore addedScores"> 5.7/6.0 <!--instructors[prof].average_overall--> </td>');
+            $(this).find('th').eq(8).after('<th class="PSLEVEL1GRIDCOLUMNHDR ClassScoreHeading addedScores">Class Score</th>');
+             $(this).find('td').eq(8).after('<td class="PSLEVEL3GRIDROW ClassScore addedScores">5.2/6.0</td>');
 
             professorsOnPage.push(prof);
     });
