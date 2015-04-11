@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "RateMyBuffs",
-  "description": "Add cufcq ratings to UCB class registration pages.",
+  "description": "Add CUFCQ statistics and links to UCB class registration pages.",
   "version": "1.0",
 
   "icons": { "16": "images/rsz_cufcq_16.png",
