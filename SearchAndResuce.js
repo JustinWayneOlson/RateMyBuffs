@@ -13,8 +13,11 @@ function grabProfessorsName() {
         iframe = $("#ptifrmtgtframe").contents(); //creates a variable that references to the iframe
         $.each(iframe.find("span[id*=MTG_INSTR]"),
             function() {
-                professorsOnPage[i] = $(this).text;
-                i++;
+                if($(this.text) != "Staff"){
+                    professorsOnPage[i] = $(this).text;
+                    i++;
+                }
+
                 //store in array
                 //modify fist last to first-last
                 //append to url "cufcq/instructors/"
@@ -22,6 +25,11 @@ function grabProfessorsName() {
 
         //var instructorName = iframe.find("span[id*=MTG_INSTR");
         for(j=0;j<professorsOnPage.length;j++){
+            for(k=0;k<(professorsOnPage[j].length-1);k++){
+                if((professorsOnPage[j])[k] == " "){
+                    (professorsOnPage[j])[k] = "-"
+                }
+            }
             console.log(professorsOnPage[j]);
         }
 }
