@@ -5,7 +5,7 @@ Made by:
 
 Justin Olsen @JustinWayneOlson  
 
-Connor Simmering @simmeringc  
+Conner Simmering @simmeringc  
 
 Samuel Volin @untra  
 
