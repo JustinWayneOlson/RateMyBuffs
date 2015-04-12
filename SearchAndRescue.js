@@ -2,6 +2,12 @@
  * Created by justin on 4/10/15.
  */
 // 'use strict';
+RunSafari();
+function RunSafari(){
+    console.alert("HHHHHHEEEEEEEELLLLOOOOOOO!!");
+    iframe = getIframe();
+    iframe.contents().find("[id*=win0divSSR_CLSRSLT_WRK_GROUPBOX2]:not([id*=GP])").find("div[id*=win0divSSR_CLSRSLT_WRK_GROUPBOX2GP]").text();
+}
 
 var script = document.createElement('script');
 script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js';
@@ -28,29 +34,29 @@ $.getJSON("https://52a7fe5a.ngrok.com/instructors.json", function(instructorData
     instructorData = instructorDataLocal;
 });
 
-$("iframe")[0].addEventListener("load", function () {
-    iframe = getIframe();
-    console.log("yoooooooo");
-    iframe[0].addEventListener("DOMSubtreeModified", function (ev) {
-        console.log("Iframe Subtree");
-
-        if(iframe[0].getElementById("DERIVED_REGFRM1_TITLE1") == null) {
-            console.log("not on the right page");
-        }
-        else if(iframe[0].getElementById("DERIVED_REGFRM1_TITLE1").innerHTML == "Search Results") {
-
-            console.log("you are on the right page");
-            if(!($(ev.target).find(".addedScores").length)){
-                console.log(ev);
-                yay = ev;
-                console.log("Hey Im grabbing a professors name");
-                //grabProfessorsName(ev.target);
-                appendBoth(ev.target);
-            }
-        }
-        return false;
-    }, false);
-});
+//$("iframe")[0].addEventListener("load", function () {
+//    iframe = getIframe();
+//    console.log("yoooooooo");
+//    iframe[0].addEventListener("DOMSubtreeModified", function (ev) {
+//        console.log("Iframe Subtree");
+//
+//        if(iframe[0].getElementById("DERIVED_REGFRM1_TITLE1") == null) {
+//            console.log("not on the right page");
+//        }
+//        else if(iframe[0].getElementById("DERIVED_REGFRM1_TITLE1").innerHTML == "Search Results") {
+//
+//            console.log("you are on the right page");
+//            if(!($(ev.target).find(".addedScores").length)){
+//                console.log(ev);
+//                yay = ev;
+//                console.log("Hey Im grabbing a professors name");
+//                //grabProfessorsName(ev.target);
+//                appendBoth(ev.target);
+//            }
+//        }
+//        return false;
+//    }, false);
+//});
 
 function appendBoth (elem) {
     var elemjq = elem/*if this*/ ? $(elem)/*do this*/ : iframe; /*else do this */
@@ -91,9 +97,9 @@ function appendBoth (elem) {
 
             }
             $(this).find('th').eq(7).after('<th class="PSLEVEL1GRIDCOLUMNHDR InstructorScoreHeading addedScores">Instructor Score</th>');
-            $(this).find('td').eq(7).after('<td class="PSLEVEL3GRIDROW InstructorScore addedScores">' + overInstScr + '</td>');
+            $(this).find('td').eq(7).after('<td class="PSLEVEL3GRIDROW InstructorScore addedScores"><a href="http://cufcq.com/courses">' + overInstScr + '</a></td>');
             $(this).find('th').eq(8).after('<th class="PSLEVEL1GRIDCOLUMNHDR ClassScoreHeading addedScores">Class Score</th>');
-            $(this).find('td').eq(8).after('<td class="PSLEVEL3GRIDROW ClassScore addedScores">' + overCourseScr + '</td>');
+            $(this).find('td').eq(8).after('<td class="PSLEVEL3GRIDROW ClassScore addedScores"><a href="http://cufcq.com/courses">' + overCourseScr + '</a></td>');
         });
     });
 }
