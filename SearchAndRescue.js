@@ -26,7 +26,7 @@ $.getJSON("https://5460425e.ngrok.com/courses.json", function(courseDataLocal) {
 
 
 var instructorData;
-$.getJSON("https://5460425e.ngrok.com/instructors/json", function(instructorDataLocal) {
+$.getJSON("https://5460425e.ngrok.com/instructors.json", function(instructorDataLocal) {
     instructorData = instructorDataLocal
 });
 
