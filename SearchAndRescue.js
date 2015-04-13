@@ -1,5 +1,6 @@
 /**
  * Created by justin on 4/10/15.
+ * for use on the University of Colorado's course registration page
  */
 // 'use strict';
 
@@ -19,40 +20,40 @@ function getIframe() {
 }
 
 var courseData;
-$.getJSON("https://52a7fe5a.ngrok.com/courses.json", function(courseDataLocal) {
-    courseData = courseDataLocal;
-});
+$.getJSON("https://97474e8.ngrok.com/courses.json"), function(courseDataLocal) {
+    courseData = courseDataLocal;}
+
 
 var instructorData;
-$.getJSON("https://52a7fe5a.ngrok.com/instructors.json", function(instructorDataLocal) {
-    instructorData = instructorDataLocal;
-});
+$.getJSON("https://97474e8.ngrok.com/instructors.json"), function(instructorDataLocal) {
+    instructorData = instructorDataLocal;}
+
 
 $("iframe")[0].addEventListener("load", function () {
     iframe = getIframe();
     console.log("yoooooooo");
     iframe[0].addEventListener("DOMSubtreeModified", function (ev) {
-        console.log("Iframe Subtree");
+        //console.log("Iframe Subtree");
 
         if(iframe[0].getElementById("DERIVED_REGFRM1_TITLE1") == null) {
-            console.log("not on the right page");
+            //console.log("not on the right page");
         }
         else if(iframe[0].getElementById("DERIVED_REGFRM1_TITLE1").innerHTML == "Search Results") {
 
-            console.log("you are on the right page");
+            //console.log("you are on the right page");
             if(!($(ev.target).find(".addedScores").length)){
-                console.log(ev);
+                //console.log(ev);
                 yay = ev;
                 console.log("Hey Im grabbing a professors name");
                 //grabProfessorsName(ev.target);
-                appendBoth(ev.target);
+                appendTables(ev.target);
             }
         }
         return false;
     }, false);
 });
 
-function appendBoth (elem) {
+function appendTables (elem) {
     var elemjq = elem/*if this*/ ? $(elem)/*do this*/ : iframe; /*else do this */
     if ($(elemjq).find(".addedScores").length) {
         return;
@@ -61,19 +62,19 @@ function appendBoth (elem) {
 
 
         var courseHtml = $(this).find("div[id*=win0divSSR_CLSRSLT_WRK_GROUPBOX2GP]").text();
-        console.log("coursehtml ", courseHtml);
+        //console.log("coursehtml ", courseHtml);
         var course = courseHtml.match(/[A-Z]{4} [0-9]{4}/)[0];
-        console.log("course ", course);
+        //console.log("course ", course);
         course = normalizeCourse(course);
         course = normalize(course);
-        console.log("normalizedCourse ", course);
+        //console.log("normalizedCourse ", course);
         if(courseData[course]) {
             overCourseScr = courseData[course].average_overall.toFixed(1) + "/6.0";
         }
         else{
             overCourseScr = "No Data Found";
         }
-        console.log("overCourseScr ", overCourseScr);
+        //console.log("overCourseScr ", overCourseScr);
 
         $(this).find("[id*=win0divSSR_CLSRCH_MTG1]").each(function () {
             var prof = $(this).find("span[id*=MTG_INSTR]").text();
