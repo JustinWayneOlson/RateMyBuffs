@@ -20,13 +20,15 @@ function getIframe() {
 }
 
 var courseData;
-$.getJSON("https://97474e8.ngrok.com/courses.json"), function(courseDataLocal) {
-    courseData = courseDataLocal;}
+$.getJSON("https://5460425e.ngrok.com/courses.json", function(courseDataLocal) {
+    courseData = courseDataLocal
+});
 
 
 var instructorData;
-$.getJSON("https://97474e8.ngrok.com/instructors.json"), function(instructorDataLocal) {
-    instructorData = instructorDataLocal;}
+$.getJSON("https://5460425e.ngrok.com/instructors/json", function(instructorDataLocal) {
+    instructorData = instructorDataLocal
+});
 
 
 $("iframe")[0].addEventListener("load", function () {
