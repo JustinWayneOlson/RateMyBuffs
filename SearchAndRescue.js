@@ -20,13 +20,13 @@ function getIframe() {
 }
 
 var courseData;
-$.getJSON("https://5460425e.ngrok.com/courses.json", function(courseDataLocal) {
+$.getJSON(chrome.extension.getURL('/courses.json'), function(courseDataLocal) {
     courseData = courseDataLocal
 });
 
 
 var instructorData;
-$.getJSON("https://5460425e.ngrok.com/instructors.json", function(instructorDataLocal) {
+$.getJSON(chrome.extension.getURL('/instructors.json'), function(instructorDataLocal) {
     instructorData = instructorDataLocal
 });
 
@@ -45,7 +45,6 @@ $("iframe")[0].addEventListener("load", function () {
             //console.log("you are on the right page");
             if(!($(ev.target).find(".addedScores").length)){
                 //console.log(ev);
-                yay = ev;
                 //console.log("Hey Im grabbing a professors name");
                 //grabProfessorsName(ev.target);
                 appendTables(ev.target);

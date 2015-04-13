@@ -13,7 +13,10 @@
     "default_icon": "images/rsz_cufcq_128.png",
     "default_popup": "clicktest.html"
   },
-
+  "web_accessible_resources": [
+   "courses.json",
+    "instructors.json"
+  ],
 
 "content_scripts": [
     {
