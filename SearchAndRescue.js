@@ -33,7 +33,7 @@ $.getJSON("https://5460425e.ngrok.com/instructors.json", function(instructorData
 
 $("iframe")[0].addEventListener("load", function () {
     iframe = getIframe();
-    console.log("yoooooooo");
+    //console.log("yoooooooo");
     iframe[0].addEventListener("DOMSubtreeModified", function (ev) {
         //console.log("Iframe Subtree");
 
@@ -46,7 +46,7 @@ $("iframe")[0].addEventListener("load", function () {
             if(!($(ev.target).find(".addedScores").length)){
                 //console.log(ev);
                 yay = ev;
-                console.log("Hey Im grabbing a professors name");
+                //console.log("Hey Im grabbing a professors name");
                 //grabProfessorsName(ev.target);
                 appendTables(ev.target);
             }
