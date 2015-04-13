@@ -10,10 +10,10 @@ script.type = 'text/javascript';                            //import jquery
 document.getElementsByTagName('head')[0].appendChild(script);
 //var url = window.location.href; //get current url
 
-var professorsOnPage = new Array();
-var courseOnPage = new Array();
+//var professorsOnPage = new Array();
+//var courseOnPage = new Array();
 var i,r = 0;
-var instructors= new Object();
+//var instructors= new Object();
 
 function getIframe() {
     return $("#ptifrmtgtframe").contents();
