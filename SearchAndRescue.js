@@ -95,12 +95,17 @@ function appendTables (elem) {
             }
             //console.log(this);
             $(this).find('th').eq(7).after('<th class="PSLEVEL1GRIDCOLUMNHDR InstructorScoreHeading addedScores">Instructor Score</th>');
-            $(this).find('td').eq(7).after('<td class="PSLEVEL3GRIDROW InstructorScore addedScores"><a class="instructorScoreLink"  href="http://cufcq.com/instructors/"' + prof + ' target="_blank">' + overInstScr + '</a></td>');
+            if(instructorData[prof] && prof!= "staff"){
+                $(this).find('td').eq(7).after('<td class="PSLEVEL3GRIDROW InstructorScore addedScores"><a class="instructorScoreLink"  href="http://cufcq.com/instructors/' + prof + '" target="_blank">' + overInstScr + '</a></td>');
+            }
+            else{
+                $(this).find('td').eq(7).after('<td class="PSLEVEL3GRIDROW InstructorScore addedScores"><a class="instructorScoreLink">' + overInstScr + '</a></td>');
+            }
+
             //console.log(prof);
             $(this).find('th').eq(8).after('<th class="PSLEVEL1GRIDCOLUMNHDR ClassScoreHeading addedScores">Class Score</th>');
-            $(this).find('td').eq(8).after('<td class="PSLEVEL3GRIDROW ClassScore addedScores"><a class="courseScoreLink" href="http://cufcq.com/courses/"' + course + 'target="_blank">' + overCourseScr + '</td>');
-            //iframe.find(".instructorScoreLink").attr("href","http://cufcq.com/instructors/" + prof);
-            //iframe.find(".classScoreLink").attr("href","http://cufcq.com/courses/" + course);
+            $(this).find('td').eq(8).after('<td class="PSLEVEL3GRIDROW ClassScore addedScores"><a class="courseScoreLink" href="http://cufcq.com/courses/' + course +'" target="_blank">' + overCourseScr + '</td>');
+
         });
     });
 }
@@ -108,8 +113,8 @@ function appendTables (elem) {
 function normalize(prof){
     return prof.replace(" ", "-").toLowerCase();
 }
-function normalizeCourse(course) {
-    return course.replace(/([A-Z]{4}) (\d{4}).+/, "$1-$2").toLowerCase();
+function normalizeCourse(course){
+    return course.replace(/([A-Z]{4}) (\d{4}).+/,"$1-$2").toLowerCase();
 }
 
 
