@@ -11,3 +11,7 @@ Cufcq.com collects its data from the office of planning and budget's publicly av
 To use RateMyBuffs, add the extension to your chrome browser, and search for a class! Just one click and forget. The extension will automatically update itself as more features become available.
 
 Update 1.0.1 - "Added the ability to run without a local web host so all users can properly run the extension. It also correctly runs on only the target page"
+
+Update 1.0.2 - "Removed unnecessary files. Added working links to cufcq.com directly to the correct instructor or course."
+
+Update 1.0.3 - "Bug fix" 
