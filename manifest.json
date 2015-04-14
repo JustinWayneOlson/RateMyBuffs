@@ -11,7 +11,7 @@
 
   "browser_action": {
     "default_icon": "images/rsz_cufcq_128.png",
-    "default_popup": "clicktest.html"
+    "default_popup": "popup.html"
   },
   "web_accessible_resources": [
    "courses.json",
