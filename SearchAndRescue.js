@@ -11,7 +11,6 @@ document.getElementsByTagName('head')[0].appendChild(script);
 //var url = window.location.href; //get current url
 //var professorsOnPage = new Array();
 //var courseOnPage = new Array();
-var i,r = 0;
 
 //var instructors= new Object();
 
@@ -20,7 +19,7 @@ function getIframe() {
 }
 
 var courseData;
-$.getJSON(chrome.extension.getURL('/courses.json'), function(courseDataLocal) {
+$.getJSON(chrome.extension.getURL('/courses.json'), function (courseDataLocal) {
     courseData = courseDataLocal
 });
 
@@ -44,10 +43,12 @@ $("iframe")[0].addEventListener("load", function () {
 
             //console.log("you are on the right page");
             if(!($(ev.target).find(".addedScores").length)){
-                //console.log(ev);
+                //console.log(ev + "ev");
                 //console.log("Hey Im grabbing a professors name");
                 //grabProfessorsName(ev.target);
+                //console.log("ev target" + ev.target);
                 appendTables(ev.target);
+
             }
         }
         return false;
@@ -92,12 +93,14 @@ function appendTables (elem) {
                 }
 
             }
+            //console.log(this);
             $(this).find('th').eq(7).after('<th class="PSLEVEL1GRIDCOLUMNHDR InstructorScoreHeading addedScores">Instructor Score</th>');
-            $(this).find('td').eq(7).after('<td class="PSLEVEL3GRIDROW InstructorScore addedScores"><a class="instructorScoreLink"  href="http://cufcq.com/instructors/" target="_blank">' + overInstScr + '</a></td>');
+            $(this).find('td').eq(7).after('<td class="PSLEVEL3GRIDROW InstructorScore addedScores"><a class="instructorScoreLink"  href="http://cufcq.com/instructors/"' + prof + ' target="_blank">' + overInstScr + '</a></td>');
+            //console.log(prof);
             $(this).find('th').eq(8).after('<th class="PSLEVEL1GRIDCOLUMNHDR ClassScoreHeading addedScores">Class Score</th>');
-            $(this).find('td').eq(8).after('<td class="PSLEVEL3GRIDROW ClassScore addedScores"><a class="courseScoreLink" href="http://cufcq.com/courses/" target="_blank">' + overCourseScr + '</td>');
-            iframe.find(".instructorScoreLink").attr("href","http://cufcq.com/instructors/" + prof);
-            iframe.find(".classScoreLink").attr("href","http://cufcq.com/courses/" + course);
+            $(this).find('td').eq(8).after('<td class="PSLEVEL3GRIDROW ClassScore addedScores"><a class="courseScoreLink" href="http://cufcq.com/courses/"' + course + 'target="_blank">' + overCourseScr + '</td>');
+            //iframe.find(".instructorScoreLink").attr("href","http://cufcq.com/instructors/" + prof);
+            //iframe.find(".classScoreLink").attr("href","http://cufcq.com/courses/" + course);
         });
     });
 }
@@ -105,6 +108,8 @@ function appendTables (elem) {
 function normalize(prof){
     return prof.replace(" ", "-").toLowerCase();
 }
-function normalizeCourse(course){
-    return course.replace(/([A-Z]{4}) (\d{4}).+/,"$1-$2").toLowerCase();
+function normalizeCourse(course) {
+    return course.replace(/([A-Z]{4}) (\d{4}).+/, "$1-$2").toLowerCase();
 }
+
+
