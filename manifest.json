@@ -3,7 +3,7 @@
 
   "name": "RateMyBuffs",
   "description": "Add CUFCQ statistics and links to UCB class registration pages.",
-  "version": "1.0.1",
+  "version": "1.0.2",
 
   "icons": { "16": "images/rsz_cufcq_16.png",
            "48": "images/rsz_cufcq_48.png",
@@ -11,7 +11,7 @@
 
   "browser_action": {
     "default_icon": "images/rsz_cufcq_128.png",
-    "default_popup": "clicktest.html"
+    "default_popup": "popup.html"
   },
   "web_accessible_resources": [
    "courses.json",
