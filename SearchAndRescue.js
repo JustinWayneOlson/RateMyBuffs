@@ -11,6 +11,8 @@ document.getElementsByTagName('head')[0].appendChild(script);
 //var url = window.location.href; //get current url
 //var professorsOnPage = new Array();
 //var courseOnPage = new Array();
+var courseProfDict = {};
+var courseProfs = [];
 
 //var instructors= new Object();
 
@@ -61,14 +63,14 @@ function appendTables (elem) {
         return;
     }
     $.each(elemjq.find("[id*=win0divSSR_CLSRSLT_WRK_GROUPBOX2]:not([id*=GP])"), function() {
-
-
         var courseHtml = $(this).find("div[id*=win0divSSR_CLSRSLT_WRK_GROUPBOX2GP]").text();
         //console.log("coursehtml ", courseHtml);
         var course = courseHtml.match(/[A-Z]{4} [0-9]{4}/)[0];
         //console.log("course ", course);
         course = normalizeCourse(course);
         course = normalize(course);
+        //console.log("building instructor-course Dictionary");
+        //courseProfessors(course);
         //console.log("normalizedCourse ", course);
         if(courseData[course]) {
             overCourseScr = courseData[course].average_overall.toFixed(1) + "/6.0";
@@ -76,8 +78,8 @@ function appendTables (elem) {
         else{
             overCourseScr = "No Data Found";
         }
-        //console.log("overCourseScr ", overCourseScr);
 
+        //console.log("overCourseScr ", overCourseScr);
         $(this).find("[id*=win0divSSR_CLSRCH_MTG1]").each(function () {
             var prof = $(this).find("span[id*=MTG_INSTR]").text();
             prof = normalize(prof);
@@ -85,6 +87,12 @@ function appendTables (elem) {
                 overInstScr = "N/A";
             }
             else {
+                if ($.inArray(prof, courseProfs) < 0) {
+                    courseProfs.push(prof);
+                    courseProfDict[course] = courseProfs;
+
+                console.log(courseProfDict);
+                }
                 if (instructorData[prof]) {
                     overInstScr = instructorData[prof].average_overall.toFixed(1) + "/6.0";
                 }
@@ -107,6 +115,9 @@ function appendTables (elem) {
             $(this).find('td').eq(8).after('<td class="PSLEVEL3GRIDROW ClassScore addedScores"><a class="courseScoreLink" href="http://cufcq.com/courses/' + course +'" target="_blank">' + overCourseScr + '</td>');
 
         });
+        courseProfs = [];
+        //console.log("IM DOING IT");
+
     });
 }
 
@@ -116,5 +127,27 @@ function normalize(prof){
 function normalizeCourse(course){
     return course.replace(/([A-Z]{4}) (\d{4}).+/,"$1-$2").toLowerCase();
 }
-
-
+//function courseProfessors(course) {
+//    iframe = getIframe();
+//    var courseInstructors = [];
+//    iframe.find("[id*=win0divSSR_CLSRCH_MTG1]").each(function () {
+//        var prof =$(this).find("span[id*=MTG_INSTR]").text();
+//        prof = normalize(prof);
+//        console.log(prof + ":" + course);
+//        if(prof!="staff"){
+//            for(var j=0; j<courseInstructors.length;j++){
+//                if(prof = courseInstructors[j]){
+//                    return;
+//                }
+//            }
+//
+//            courseInstructors.push(prof);
+//            //courseProfDict = {
+//            //    course:courseInstructors
+//            //};
+//            courseProfDict[course] = courseInstructors;
+//            console.log(courseProfDict);
+//        }
+//
+//    });
+//}
