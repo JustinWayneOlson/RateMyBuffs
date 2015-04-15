@@ -88,7 +88,7 @@ function appendTables (elem) {
             }
             else {
                 if ($.inArray(prof, courseProfs) < 0) {
-                    courseProfs.push(prof);
+                    courseProfs.push(instructorData[prof]);
                     courseProfDict[course] = courseProfs;
 
                 console.log(courseProfDict);
@@ -113,14 +113,24 @@ function appendTables (elem) {
             //console.log(prof);
             $(this).find('th').eq(8).after('<th class="PSLEVEL1GRIDCOLUMNHDR ClassScoreHeading addedScores">Class Score</th>');
             $(this).find('td').eq(8).after('<td class="PSLEVEL3GRIDROW ClassScore addedScores"><a class="courseScoreLink" href="http://cufcq.com/courses/' + course +'" target="_blank">' + overCourseScr + '</td>');
+            //if instructor score = largestValue set color green
+            var largestValue = courseProfs[0].average_overall;
+            for(var k=0; k<courseProfs; k++){
+                if(courseProfs[k].average_overall > largestValue){
+                    largestValue = courseProfs[k].average_overall;
+                    console.log ("The largest value is " + largestValue);
+                }
+            }
+            console.log(largestValue);
+            //if not set color blue
 
         });
         courseProfs = [];
         //console.log("IM DOING IT");
 
     });
+    //console.log("you are here");
 }
-
 function normalize(prof){
     return prof.replace(" ", "-").toLowerCase();
 }
