@@ -93,9 +93,10 @@ function appendTables (elem) {
                 }
 
             }
+         	var prof2 = prof.replace(/([a-z]*)-([a-z]*)/, "$2-$1");
             $(this).find('th').eq(7).after('<th class="PSLEVEL1GRIDCOLUMNHDR InstructorScoreHeading addedScores">Instructor Score</th>');
             if(instructorData[prof] && prof!= "staff"){
-                $(this).find('td').eq(7).after('<td class="PSLEVEL3GRIDROW InstructorScore addedScores"><a class="instructorScoreLink"  href="http://cufcq.com/instructors/' + prof + '" target="_blank">' + overInstScr + '</a></td>');
+                $(this).find('td').eq(7).after('<td class="PSLEVEL3GRIDROW InstructorScore addedScores"><a class="instructorScoreLink"  href="http://cufcq.com/instructors/' + prof2 + '" target="_blank">' + overInstScr + '</a></td>');
             }
             else{
                 $(this).find('td').eq(7).after('<td class="PSLEVEL3GRIDROW InstructorScore addedScores">' + overInstScr + '</td>');
